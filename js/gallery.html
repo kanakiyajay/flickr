@@ -1,7 +1,11 @@
 <div class="row" ng-controller="FlickrCtrl" ng-repeat="item in feeds.items">
-	<div class="col-lg-4 pull-center">
-		<img ng-src="{{item.media.m}}" alt="">
+	<div class="col-lg-2"></div>
+	<div class="col-lg-4">
+		<img class="img-responsive" ng-src="{{item.media.m}}" alt="">
 		<p class="item">{{item.title}}</p>
-		<h3 class="pull-right"><a href="#/author/{{item.author_id}}">{{item.author}}</a></h3>
+	</div>
+	<div class="col-lg-3">
+		<p>Photo Uploaded by {{item.author.substring(19,item.author.length-1)}}</p>
+		<a class="pull-right" href="#/author/{{item.author_id}}">See other photos by {{item.author.substring(19,item.author.length-1)}}</a>
 	</div>
 </div>

@@ -1,5 +1,5 @@
 /*!
- ** Example App
+ ** Flickr App
  ** Licensed under the Apache License v2.0
  ** http://www.apache.org/licenses/LICENSE-2.0
  ** Built by Jay Kanakiya ( @techiejayk )
@@ -9,6 +9,7 @@
 
 var App = angular.module('flickr', ['ngRoute']);
 
+// jsonFlickrFeed is required because Flickrs service returns a function that directly calls jsonFlickrFeed
 var jsonFlickrFeed = function  (data) {
 	window.feeds = data;
 };
@@ -20,7 +21,6 @@ App.controller('FlickrCtrl', function($scope, $http) {
 	}).error(function  (res) {
 		$scope.feeds = window.feeds;
 	});
-
 });
 
 App.controller('AuthorCtrl', function($scope, $http ,$route) {
@@ -35,7 +35,9 @@ App.controller('AuthorCtrl', function($scope, $http ,$route) {
 });
 
 App.controller('FriendCtrl',function  ($scope,$http,$route) {
-	console.log($route.current.params);
+
+	$scope.author = $route.current.params.id;
+
 	$http.jsonp("http://api.flickr.com/services/feeds/photos_friends.gne?format=json&user_id="+$route.current.params.id).success(function  (data) {
 		console.log(data);
 	}).error(function  (res) {

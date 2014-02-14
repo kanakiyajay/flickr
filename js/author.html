@@ -1,9 +1,13 @@
 <div class="container" ng-controller="AuthorCtrl">
-	<h3><a href="#/author/{{feeds.items[0].author_id}}/friend">Photos from my friends</a></h3>
+	<h2 class="heading">Photos of {{feeds.items[0].author.substring(19,feeds.items[0].author.length-1)}}</h2>
+	<h4><a href="#/author/{{feeds.items[0].author_id}}/friend">Photos from his friends</a></h4>
+
 	<div class="row" ng-repeat="item in feeds.items">
+		<div class="col-lg-2"></div>
 		<div class="col-lg-4">
-			<img ng-src="{{item.media.m}}" alt="">
-			<p class="item">{{item.title}}</p>
+			<img class="img-responsive" ng-src="{{item.media.m}}" alt="">
 		</div>
+			<p class="item-title">{{item.title}}</p>
 	</div>
+
 </div>
