@@ -7,7 +7,7 @@
 
 'use strict';
 
-var App = angular.module('flickr', []);
+var App = angular.module('flickr', ['ngRoute']);
 
 var jsonFlickrFeed = function  (data) {
 	window.feeds = data;
@@ -23,15 +23,36 @@ App.controller('FlickrCtrl', function($scope, $http) {
 
 });
 
-/*
+App.controller('AuthorCtrl', function($scope, $http ,$route) {
+
+	console.log($route.current.params);
+	$http.jsonp("http://api.flickr.com/services/feeds/photos_public.gne?format=json&id="+$route.current.params.id).success(function  (data) {
+		console.log(data);
+	}).error(function  (res) {
+		$scope.feeds = window.feeds;
+	});
+
+});
+
+App.controller('FriendCtrl',function  ($scope,$http,$route) {
+	console.log($route.current.params);
+	$http.jsonp("http://api.flickr.com/services/feeds/photos_friends.gne?format=json&user_id="+$route.current.params.id).success(function  (data) {
+		console.log(data);
+	}).error(function  (res) {
+		$scope.feeds = window.feeds;
+	});
+});
+
 App.config(function  ($routeProvider,$locationProvider) {
-    $routeProvider
-	.when("/author/:id",{
-		templateUrl : "js/author.html" , controller : "AuthorCtrl"
+	$routeProvider.when("/author/:id",{
+		templateUrl : "js/author.html" ,
+		controller : "AuthorCtrl"
+	}).when("/author/:id/friend",{
+		templateUrl : "js/friend.html",
+		controller : "FriendCtrl"
 	})
 	.otherwise({
-		templateUrl : "js/gallery.html"
+		templateUrl : "js/gallery.html",
+		controller : "FlickrCtrl"
 	});
-    $locationProvider.html5Mode(true);
 });
-*/

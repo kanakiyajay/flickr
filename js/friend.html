@@ -1,9 +1,9 @@
-<div class="container" ng-controller="AuthorCtrl">
-	<h3><a href="#/author/{{feeds.items[0].author_id}}/friend">Photos from my friends</a></h3>
+<div class="container" ng-controller="FriendCtrl">
 	<div class="row" ng-repeat="item in feeds.items">
 		<div class="col-lg-4">
 			<img ng-src="{{item.media.m}}" alt="">
 			<p class="item">{{item.title}}</p>
+			<h3 class="pull-right"><a href="#/author/{{item.author_id}}">{{item.author}}</a></h3>
 		</div>
 	</div>
 </div>
