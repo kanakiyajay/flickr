@@ -1,11 +1,12 @@
-<div class="row" ng-controller="FlickrCtrl" ng-repeat="item in feeds.items">
-	<div class="col-lg-2"></div>
-	<div class="col-lg-4">
-		<img class="img-responsive" ng-src="{{item.media.m}}" alt="">
-		<p class="item">{{item.title}}</p>
-	</div>
-	<div class="col-lg-3">
-		<p>Photo Uploaded by {{item.author.substring(19,item.author.length-1)}}</p>
-		<a class="pull-right" href="#/author/{{item.author_id}}">See other photos by {{item.author.substring(19,item.author.length-1)}}</a>
+<h3 class="heading">Public Feed of Flickr</h3>
+<div class="row" ng-controller="FlickrCtrl" masonry>
+	<div class="col-lg-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="item in feeds.items">
+		<div class="portfolio-item">
+			<img class="img-responsive portfolio-img" ng-src="{{item.media.m}}" alt="Flickr Photo">
+			<p class="portfolio-desp">
+				{{item.title}} uploaded by {{item.author.substring(19,item.author.length-1)}}
+				<a class="pull-right" href="#/author/{{item.author_id}}">See other photos by {{item.author.substring(19,item.author.length-1)}}</a>
+			</p>
+		</div>
 	</div>
 </div>

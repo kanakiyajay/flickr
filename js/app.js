@@ -7,7 +7,7 @@
 
 "use strict";
 
-var App = angular.module("flickr", ["ngRoute"]);
+var App = angular.module("flickr", ["ngRoute","wu.masonry"]);
 
 /* jsonFlickrFeed is a workaround required because Flickrs service returns a function that directly calls jsonFlickrFeed
 * 	Open http://api.flickr.com/services/feeds/photos_public.gne?format=json in the browser
@@ -17,29 +17,25 @@ var jsonFlickrFeed = function  (data) {
 	window.feeds = data;
 };
 
-App.controller("FlickrCtrl", function($scope, $http) {
-
+App.controller("FlickrCtrl", ["$scope","$http",function  ($scope,$http) {
 	$http.jsonp("http://api.flickr.com/services/feeds/photos_public.gne?format=json").error(function  () {
 		$scope.feeds = window.feeds;
 	});
-});
+}]);
 
-App.controller("AuthorCtrl", function($scope, $http ,$route) {
-
+App.controller("AuthorCtrl", ["$scope","$http","$route",function  ($scope,$http,$route) {
 	$http.jsonp("http://api.flickr.com/services/feeds/photos_public.gne?format=json&id="+$route.current.params.id).error(function  () {
 		$scope.feeds = window.feeds;
 	});
+}]);
 
-});
-
-App.controller("FriendCtrl",function  ($scope,$http,$route) {
-
+App.controller("FriendCtrl",["$scope","$http","$route",function  ($scope,$http,$route) {
 	$scope.author = $route.current.params.id;
 
 	$http.jsonp("http://api.flickr.com/services/feeds/photos_friends.gne?format=json&user_id="+$route.current.params.id).error(function  () {
 		$scope.feeds = window.feeds;
 	});
-});
+}]);
 
 /* Routes Configuration */
 
@@ -56,5 +52,3 @@ App.config(function  ($routeProvider) {
 		controller : "FlickrCtrl"
 	});
 });
-
-// TODO : Angular-js Service for FlickrFeed

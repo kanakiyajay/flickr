@@ -1,12 +1,10 @@
-<div class="container" ng-controller="FriendCtrl">
-	<h3 class="heading">Back to photos of <a href="#/author/{{author}}">Author</a></h3>
-	<div class="row" ng-repeat="item in feeds.items">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-4">
-			<img class="img-responsive" ng-src="{{item.media.m}}" alt="">
-		</div>
-		<div class="col-lg-3">
-			<p class="item">{{item.title}}</p>
+<h3 class="heading">Back to photos of <a href="#/author/{{author}}">Author</a></h3>
+
+<div class="row" ng-controller="FriendCtrl" masonry>
+	<div class="col-lg-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="item in feeds.items">
+		<div class="portfolio-item">
+			<img class="img-responsive portfolio-img" ng-src="{{item.media.m}}" alt="">
+			<p class="portfolio-desp">{{item.title}}</p>
 		</div>
 	</div>
 </div>
